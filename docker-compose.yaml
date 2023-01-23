@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  localstack:
+    container_name: localstack_dispatch
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+    environment:
+      AWS_REGION: "us-east-2"
+      DEBUG: 1
+      LS_LOG: trace
+      EDGE_PORT: 4566
+      PROVIDER_OVERRIDE_S3: "asf"
+    networks:
+      default:
+        aliases:
+          - localhost.localstack.cloud
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
